@@ -1,5 +1,16 @@
 from gym.envs.registration import registry, register, make, spec
 
+
+# Custom
+# ----------------------------------------
+
+register(
+    id='PlanarQuad-v0',
+    entry_point='gym.envs.classic_control:PlanarQuad',
+    max_episode_steps=200,
+    reward_threshold=25.0,
+)
+
 # Algorithmic
 # ----------------------------------------
 
