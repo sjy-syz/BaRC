@@ -52,7 +52,9 @@ class Quad6DBackreachEngine:
         self.gN = matlab.double((self.nPoints * np.ones((self.problem.state_dims, 1))).tolist());
         
         ## debug
-        print(self.gMin[i][0],self.gMax[i][0], nPoints, self.problem.state_dims)
+        print(self.problem.state_dims, nPoints)
+        for i in range(self.problem.state_dims):            
+            print(self.gMin[i][0],self.gMax[i][0])  
         self.axis_coords = [np.linspace(self.gMin[i][0], self.gMax[i][0], nPoints) for i in range(self.problem.state_dims)]
 
         xg_lower = self.problem.env.unwrapped.xg_lower
