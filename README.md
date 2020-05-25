@@ -30,3 +30,16 @@ With those obtained, you must place our two gym environments `DrivingOrigin-v0` 
 Then, place our modifications to the baselines PPO algorithm into your installation of OpenAI baselines. They are located under `code/baselines/`. For this, you simply replace the `ppo1` folder in the baselines repository with ours.
 
 Now you're ready to use our code. `train.py` is the main runner interface which can be called with command line arguments.
+
+## About Vnc Viewer ##
+
+I have installed the vnc viewer on the virtual machine, so we can use the GUI now!
+
+First intall the vnc viewer on your local machine.
+
+Run the following command line to new a vnc server
+```
+vncserver -geometry 1440x1080 :1
+```
+
+Then use the **ip:5901** to visit the virtual machine, the password is `yugeyue02`.
