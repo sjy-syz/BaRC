@@ -168,6 +168,7 @@ class Quad6DbackRectangle:
             weights = np.abs(self.evaluate_value_function(potential_samples))
             weights = np.reciprocal(weights)
             weights /= np.sum(weights)
+            print(weights)
 
             sampled_idxs = np.random.choice(potential_samples.shape[0],
                                             size=size,
