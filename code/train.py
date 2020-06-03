@@ -43,7 +43,7 @@ parser.add_argument("--schedule_horizon_t_start", help="Linear schedule horizon:
 parser.add_argument("--schedule_horizon_t_end", help="Linear schedule horizon: t_end",
                     type=float, default=0.5)
 parser.add_argument("--schedule_horizon_num_iters", help="Linear schedule horizon: num_iter",
-                    type=int, default=0.5)
+                    type=int, default=20)
 
 args = parser.parse_args()
 
