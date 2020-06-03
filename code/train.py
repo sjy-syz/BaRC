@@ -42,7 +42,7 @@ parser.add_argument("--schedule_horizon_t_start", help="Linear schedule horizon:
                     type=float, default=0.1)
 parser.add_argument("--schedule_horizon_t_end", help="Linear schedule horizon: t_end",
                     type=float, default=0.5)
-parser.add_argument("--schedule_horizon_num_iter", help="Linear schedule horizon: num_iter",
+parser.add_argument("--schedule_horizon_num_iters", help="Linear schedule horizon: num_iter",
                     type=int, default=0.5)
 
 args = parser.parse_args()
@@ -362,12 +362,17 @@ def train_gridwise(**kwargs):
     pi_i.save_model(MODEL_DIR, iteration=i);
 
     if args.schedule_horizon:
-        from horizonSchedule import LinearSchedule
-        horizon_schedule = LinearSchedule(t_start=0.1, t_end=0.2, num_iters=20)
+        from horizonSchedule import LinearSchedule        
+        horizon_schedule = LinearSchedule(t_start=args.schedule_horizon_t_start,
+                                          t_end=args.schedule_horizon_t_end, 
+                                          num_iters=args.schedule_horizon_num_iters)
+    else:
+        horizon_schedule = None      
 
     while i < num_iters:
     # while perf_metric < args.finish_threshold and i < num_iters:
-        horizon_schedule.update(i)
+        if horizon_schedule is not None:
+            horizon_schedule.update(i)
 
         print('Training Iteration %d' % i, flush=True);
         data_logger.update_indices({"overall_iter": i})
@@ -378,7 +383,10 @@ def train_gridwise(**kwargs):
         # I've split apart the following call into two separate ones.
         # new_starts = curriculum_strategy(starts, N_new, problem, **curric_kwargs)
         if curriculum_strategy == backward_reachable:
-            br_engine.tMax = horizon_schedule.T
+            if horizon_schedule is not None:
+                br_engine.tMax = horizon_schedule.T
+            else:
+                print("Fixed Horizon T={:.2f}".format(br_engine.tMax))
             update_backward_reachable_set(starts, **curric_kwargs);
             data_logger.save_to_npy('brs_targets', starts);
 
