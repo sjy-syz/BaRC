@@ -115,6 +115,8 @@ class Quad6DbackRectangle:
         return np.logical_and(not_collision,inbound)
 
     def evaluate_value_function(self,potential_samples):
+        print("potiential",potential_samples)
+        print("result",)
         return np.sum(np.abs((potential_samples-self.center)/(self.stateMax-self.stateMin)), axis=1)
 
 
