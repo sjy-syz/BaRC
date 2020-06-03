@@ -37,7 +37,7 @@ parser.add_argument("--variation", help="what variation to use",
                     type=int, default=None)
 
 parser.add_argument("--schedule_horizon", help="whether to use scheduled horizon for BRS",
-                    action='store_false')
+                    action='store_true')
 parser.add_argument("--schedule_horizon_t_start", help="Linear schedule horizon: t_start",
                     type=float, default=0.1)
 parser.add_argument("--schedule_horizon_t_end", help="Linear schedule horizon: t_end",
