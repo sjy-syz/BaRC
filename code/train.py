@@ -36,6 +36,15 @@ parser.add_argument("--hover_at_end", help="whether to null velocity and rates a
 parser.add_argument("--variation", help="what variation to use",
                     type=int, default=None)
 
+parser.add_argument("--schedule_horizon", help="whether to use scheduled horizon for BRS",
+                    action='store_false')
+parser.add_argument("--schedule_horizon_t_start", help="Linear schedule horizon: t_start",
+                    type=float, default=0.1)
+parser.add_argument("--schedule_horizon_t_end", help="Linear schedule horizon: t_end",
+                    type=float, default=0.5)
+parser.add_argument("--schedule_horizon_num_iter", help="Linear schedule horizon: num_iter",
+                    type=int, default=0.5)
+
 args = parser.parse_args()
 
 if args.type in ['backreach', 'random', 'ppo_only']:
@@ -352,13 +361,14 @@ def train_gridwise(**kwargs):
     i = 0
     pi_i.save_model(MODEL_DIR, iteration=i);
 
-    from horizonSchedule import LinearSchedule
-    horizon_schedule = LinearSchedule(t_start=0.1, t_end=0.2, num_iters=20)
+    if args.schedule_horizon:
+        from horizonSchedule import LinearSchedule
+        horizon_schedule = LinearSchedule(t_start=0.1, t_end=0.2, num_iters=20)
 
     while i < num_iters:
     # while perf_metric < args.finish_threshold and i < num_iters:
         horizon_schedule.update(i)
-        
+
         print('Training Iteration %d' % i, flush=True);
         data_logger.update_indices({"overall_iter": i})
 
