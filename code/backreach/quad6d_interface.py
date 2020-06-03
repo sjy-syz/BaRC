@@ -24,7 +24,8 @@ class Quad6DBackreachEngine:
 
     # Setting up variables that will be used in subsequent calls
     def reset_variables(self, problem, plot_dir, 
-                        tMax=0.1, nPoints=251.):
+                        tMax=0.1, 
+                        nPoints=251.):
         self.eng.eval("global gX gY gW gVxPhi gVyPhi;", nargout=0);
 
         self.sampled_points = None
