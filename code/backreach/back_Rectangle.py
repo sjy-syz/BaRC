@@ -115,7 +115,7 @@ class Quad6DbackRectangle:
         return np.logical_and(not_collision,inbound)
 
     def evaluate_value_function(self,potential_samples):
-        return np.sum(np.abs((potential_samples-self.center)/(self.stateMax-self.stateMin)), axis=1, keepdims=True)
+        return np.sum(np.abs((potential_samples-self.center)/(self.stateMax-self.stateMin)), axis=1)
 
 
     def sample_from_backrec(self,size=1, method='uniform'):
