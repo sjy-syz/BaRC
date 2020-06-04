@@ -56,8 +56,8 @@ class Quad6DbackRectangle:
         ## debug
         print(self.problem.state_dims, nPoints)
         for i in range(self.problem.state_dims):
-            print(self.gMin[i][0], self.gMax[i][0])
-        self.axis_coords = [np.linspace(self.gMin[i][0], self.gMax[i][0], int(nPoints)) for i in
+            print(self.stateMin[i][0], self.stateMax[i][0])
+        self.axis_coords = [np.linspace(self.stateMin[i][0], self.stateMax[i][0], int(nPoints)) for i in
                             range(self.problem.state_dims)]
 
         xg_lower = self.problem.env.unwrapped.xg_lower
