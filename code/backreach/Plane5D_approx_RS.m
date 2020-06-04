@@ -92,7 +92,8 @@ if nargin < 8
 end
 
  % Time horizon and intermediate results
-tau = 0:0.1:tMax;
+%tau = 0:0.1:tMax;
+tau = 0:0.05:tMax;
 
 plXT = Plane5D_XT([], vRange, wMax); % Create (x, \theta) subsystem
 plYT = Plane5D_YT([], vRange, wMax); % Create (x, \theta) subsystem
