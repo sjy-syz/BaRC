@@ -100,7 +100,7 @@ class Quad6DbackRectangle:
     def update_boundary(self, delta_t=0.1):
         self.actual_boundary[1] += delta_t * self.update_step
         self.actual_boundary[1] = np.minimum(self.actual_boundary[0], self.stateMax)  # the high boundary
-        self.actual_boudaary[0] -= delta_t * self.update_step
+        self.actual_boundary[0] -= delta_t * self.update_step
         self.actual_boundary[0] = np.maximum(self.actual_boundary[1], self.stateMin)  # the low boundary
 
 
