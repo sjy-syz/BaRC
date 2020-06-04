@@ -59,8 +59,6 @@ def sample(lst, distribution=None, size=1):
     if len(lst) == 0:
         raise ValueError('You passed an empty list to be sampled!\nThis usually happens when all states are\noutside of the [0.1, 0.9] reward range.')
 
-    print("!!!", distribution)
-
     if size in [None, 1]:
         return lst[choice(len(lst), size=None, p=distribution)]
 

@@ -14,7 +14,7 @@ import os
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("type", help="what kind of curriculum to employ",
-                    type=str)
+                    type=str, default='backreach')
 parser.add_argument("--debug", help="whether to print loads of information and create plots or not",
                     action="store_true")
 parser.add_argument("--brs_sample", help="how to sample from a backreachable set",
@@ -325,7 +325,8 @@ def train_gridwise(**kwargs):
     num_ppo_iters = kwargs["num_ppo_iters"];
     curriculum_strategy = kwargs["curriculum_strategy"];
     train_algo = kwargs["train_algo"];
-    start_distribution = kwargs["start_distribution"];
+    #start_distribution = kwargs["start_distribution"];
+    start_distribution = uniform
     debug = kwargs["debug"];
     data_logger = kwargs["data_logger"];
 
@@ -412,8 +413,9 @@ def train_gridwise(**kwargs):
                                  figfile=os.path.join(FIGURES_DIR, 'previous_starts_iter_%d_ppo_iter_%d' % (i, iter_count)))
 
             ########################## haven't finished the visualization part for rectangle ##########################
-
-            rho_i = list(zip(starts, start_distribution(starts)))
+            a = [1./len(starts)]*len(starts)
+            #rho_i = list(zip(starts, start_distribution(starts)))
+            rho_i = list(zip(starts, a))
             pi_i, rewards_map, ep_mean_lens, ep_mean_rews = train_step(rho_i, pi_i, train_algo, problem, num_ppo_iters=num_ppo_iters)
 
             ########################## haven't finished the visualization part for rectangle ##########################

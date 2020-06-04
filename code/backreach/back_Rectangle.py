@@ -1,4 +1,3 @@
-import matlab.engine
 import os
 import numpy as np
 from scipy.interpolate import RectBivariateSpline, interp1d
@@ -13,7 +12,7 @@ W_IDX = 5
 T1_IDX = 0
 T2_IDX = 1
 
-N = 20.
+N = 1.
 
 class Quad6DbackRectangle:
 
@@ -46,6 +45,9 @@ class Quad6DbackRectangle:
 
         x_high, vx_high, y_high, vy_high, phi_high, w_high = self.problem.state_space.high;
         self.stateMax = np.array([x_high, vx_high, y_high, vy_high, phi_high, w_high]);
+
+        # print("min",self.stateMin)
+        # print()
 
         self.nPoints = nPoints
         self.stateN = self.nPoints * np.ones((self.problem.state_dims, 1))   # not sure about the use
@@ -99,9 +101,9 @@ class Quad6DbackRectangle:
 
     def update_boundary(self, delta_t=0.1):
         self.actual_boundary[1] += delta_t * self.update_step
-        self.actual_boundary[1] = np.minimum(self.actual_boundary[0], self.stateMax)  # the high boundary
+        self.actual_boundary[1] = np.minimum(self.actual_boundary[1], self.stateMax)  # the high boundary
         self.actual_boundary[0] -= delta_t * self.update_step
-        self.actual_boundary[0] = np.maximum(self.actual_boundary[1], self.stateMin)  # the low boundary
+        self.actual_boundary[0] = np.maximum(self.actual_boundary[0], self.stateMin)  # the low boundary
 
 
     def check_membership(self,points):
