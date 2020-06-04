@@ -81,6 +81,10 @@ class Quad6DbackRectangle:
 
         self.update_step = (self.stateMax - self.stateMin)/N
 
+        self.actual_boundary = np.zeros((2,self.stateMin.shape[0]))
+        self.actual_boundary[0] = self.center
+        self.actual_boundary[1] = self.center
+
         self.update_boundary()
 
 
