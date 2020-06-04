@@ -107,14 +107,14 @@ class Quad6DbackRectangle:
 
 
     def check_membership(self,points):
-        inbound = np.logical_and(points<self.actual_boundary[1],points>self.actual_boundary[0])
+        inbound = np.logical_and(points<=self.actual_boundary[1], points>=self.actual_boundary[0])
         inbound = inbound.all(axis=1)
 
         not_collision = np.zeros_like(points[:, 0]).astype(bool)
         for idx in range(points.shape[0]):
             not_collision[idx] = not self.problem.env.unwrapped._in_obst(points[idx])
 
-        return np.logical_and(not_collision,inbound)
+        return np.logical_and(not_collision, inbound)
 
     def evaluate_value_function(self,potential_samples):
         print("potiential",potential_samples)
@@ -170,7 +170,7 @@ class Quad6DbackRectangle:
 
             # Then, evaluate their sampling weights
             weights = np.abs(self.evaluate_value_function(potential_samples))
-            weights = np.reciprocal(weights)
+            #weights = np.reciprocal(weights)
             weights /= np.sum(weights)
             print(weights)
 
