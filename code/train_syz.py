@@ -35,7 +35,8 @@ parser.add_argument("--hover_at_end", help="whether to null velocity and rates a
                     action="store_true")
 parser.add_argument("--variation", help="what variation to use",
                     type=int, default=None)
-
+parser.add_argument("--num_iters", help="Algorithm Iterations",
+                    type=int, default=20)
 args = parser.parse_args()
 
 if args.type in ['backreach', 'random', 'ppo_only']:
@@ -523,7 +524,7 @@ if __name__ == '__main__':
                                                          num_states=100, 
                                                          zero_idxs=[3, 4])
             elif args.gym_env == 'PlanarQuad-v0':
-                num_iters = 40
+                num_iters = args.num_iters
                 full_starts = [problem.env.unwrapped.start_state]
                 problem.env.unwrapped.set_hovering_goal(args.hover_at_end)
 

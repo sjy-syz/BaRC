@@ -44,6 +44,8 @@ parser.add_argument("--schedule_horizon_t_end", help="Linear schedule horizon: t
                     type=float, default=0.5)
 parser.add_argument("--schedule_horizon_num_iters", help="Linear schedule horizon: num_iter",
                     type=int, default=20)
+parser.add_argument("--num_iters", help="Algorithm Iterations",
+                    type=int, default=20)
 
 args = parser.parse_args()
 
@@ -535,7 +537,7 @@ if __name__ == '__main__':
                                                          num_states=100, 
                                                          zero_idxs=[3, 4])
             elif args.gym_env == 'PlanarQuad-v0':
-                num_iters = 40
+                num_iters = args.num_iters
                 full_starts = [problem.env.unwrapped.start_state]
                 problem.env.unwrapped.set_hovering_goal(args.hover_at_end)
 
