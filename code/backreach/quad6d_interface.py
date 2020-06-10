@@ -232,7 +232,7 @@ class Quad6DBackreachEngine:
         self.update_membership_functions(targetX, targetY, targetW, targetVxPhi, targetVyPhi)
         self.update_contour_bounds(targetX, targetY, targetW, targetVxPhi, targetVyPhi)
 
-        print('update_and_compute_backward_reachable_set end', flush=True);
+        print('update_and_compute_backward_reachable_set end{:.2f}'.format(self.tMax), flush=True);
 
 
     def evaluate_value_function(self, states):

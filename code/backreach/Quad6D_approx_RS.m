@@ -169,5 +169,5 @@ dataY = HJIPDE_solve(targetY, tau, sDY, 'none', eAY);
 dataW = HJIPDE_solve(targetW, tau, sDW, 'none', eAW);
 dataVxPhi = HJIPDE_solve(targetVxPhi, tau, sDVxPhi, 'none', eAVxPhi);
 dataVyPhi = HJIPDE_solve(targetVyPhi, tau, sDVyPhi, 'none', eAVyPhi);
-
+fprintf('tau = %.4f \n', tau(-1))
 end
