@@ -153,7 +153,7 @@ def train_ppo_only(**kwargs):
         ppo_lens.extend(ep_mean_lens)
         ppo_rews.extend(ep_mean_rews)
 
-        perf_metric = evaluate(pi_i, 
+        perf_metric = evaluate(pi_i,
                              full_start_dist, 
                              problem, 
                              debug=debug, 
@@ -477,7 +477,7 @@ def train_gridwise(**kwargs):
 
         # Ok, we've graduated!
         old_starts.extend(starts)
-        perf_metric = evaluate(pi_i, 
+        perf_metric, overall_reward = evaluate(pi_i,
                              full_start_dist, 
                              problem, 
                              debug=debug, 
@@ -494,7 +494,8 @@ def train_gridwise(**kwargs):
         overall_perf.append(perf_metric)
         overall_area.append(area_coverage*100.)
 
-        data_logger.add_rows({'overall_perf': [perf_metric], 'overall_area': [area_coverage]})
+        data_logger.add_rows({'overall_perf': [perf_metric], 'overall_area': [area_coverage],
+                              'overall_reward': [overall_reward]})
 
         if debug:
             plot_performance(range(len(overall_perf)), overall_perf, ylabel=r'% Successful Starts', xlabel='Iteration', figfile=os.path.join(FIGURES_DIR, 'overall_perf'))

@@ -77,24 +77,30 @@ def weighted_sample(weighted_lst, size=1):
 ##############
 def evaluate(policy, weighted_start_states, problem, 
              debug=False, figfile=None):
-    if problem.env_name == 'DrivingOrigin-v0':
-        start_states = list()
-        results = list()
-        
-        for (start_state, prob) in weighted_start_states:
-            reached_goal = rl_utils.rollout(policy, start_state, problem)
-            start_states.append(start_state)
-            results.append(int(reached_goal))
+    #if problem.env_name == 'DrivingOrigin-v0':
+    start_states = list()
+    results = list()
 
-        if debug:
-            visualize_eval(start_states, problem, results,
-                           figfile=figfile, make_eps_v=True)
+    for (start_state, prob) in weighted_start_states:
+        reached_goal = rl_utils.rollout(policy, start_state, problem)
+        start_states.append(start_state)
+        results.append(int(reached_goal))
 
-        return np.mean(results)*100.
+    if debug:
+        visualize_eval(start_states, problem, results,
+                       figfile=figfile, make_eps_v=True)
 
-    elif problem.env_name == 'PlanarQuad-v0':
+    total_rewards = 0
+    for i in range(10):
         _, _, _, rewards = rl_utils.rollout(policy, problem.env.unwrapped.start_state, problem, return_rewards=True)
-        return np.sum(rewards)
+        total_rewards += rewards
+
+
+    return np.mean(results)*100., total_rewards/10.
+
+    # elif problem.env_name == 'PlanarQuad-v0':
+    #     _, _, _, rewards = rl_utils.rollout(policy, problem.env.unwrapped.start_state, problem, return_rewards=True)
+    #     return np.sum(rewards)
 
 
 #################
