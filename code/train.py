@@ -103,7 +103,7 @@ def train(problem,              # Problem object, describing the task.
           debug=False):
 
     data_logger = DataLogger(col_names=['overall_iter', 'ppo_iter', 
-                                        'overall_perf', 'overall_area', 
+                                        'overall_perf', 'overall_area', 'overall_reward',
                                         'ppo_perf', 'ppo_lens', 'ppo_rews'],
                              filepath=os.path.join(DATA_DIR, 'data_%s.csv' % args.type),
                              data_dir=DATA_DIR)
