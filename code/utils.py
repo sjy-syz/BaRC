@@ -93,7 +93,7 @@ def evaluate(policy, weighted_start_states, problem,
     total_rewards = 0
     for i in range(10):
         _, _, _, rewards = rl_utils.rollout(policy, problem.env.unwrapped.start_state, problem, return_rewards=True)
-        total_rewards += rewards
+        total_rewards += np.sum(rewards)
 
 
     return np.mean(results)*100., total_rewards/10.
